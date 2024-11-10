@@ -44,3 +44,8 @@ fetch('navbar.html')
   .then(html => {
     document.getElementById('footer').innerHTML = html;
   });
+  fetch('form.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('form').innerHTML = html;
+  });
