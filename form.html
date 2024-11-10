@@ -3,41 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Responsive Registration Form | CodingLab </title>
+  <title></title>
   <link rel="stylesheet" href="./assets/css/styleform.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
     <!-- Title section -->
     <div class="title">Contact us</div>
     <div class="content">
       <!-- Registration form -->
-      <form action="
-      https://script.google.com/macros/s/AKfycbwmdlk8UQS8Q79CDLNvrPFWl_YZZEZhAJm6-ttuoy6KfiEmFt8qErh1shIqcuBtz15r/exec
-            ">
+      <form id="myForm" name="submit-to-google-sheet">
         <div class="user-details">
-          <!-- Input for Full Name -->
+          <!-- Full Name Input -->
           <div class="input-box">
             <span class="details">Full Name</span>
             <input type="text" placeholder="Enter your name" required name="Name">
           </div>
-          <!-- Input for Username -->
+          <!-- Email Input -->
           <div class="input-box">
             <span class="details">Email</span>
             <input type="email" placeholder="Enter your email" required name="Email">
           </div>
-          <!-- Input for Phone Number -->
+          <!-- Phone Number Input -->
           <div class="input-box">
             <span class="details">Phone Number</span>
-            <input type="text" placeholder="Enter your phone number"  name="Phone-number">
+            <input type="text" placeholder="Enter your phone number" name="Phone-number">
           </div>
-          <!-- Input for Password -->
         </div>
         
-        <!-- Submit button -->
+        <!-- Submit Button -->
         <div class="button">
           <input type="submit" value="Submit">
         </div>
       </form>
     </div>
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwmdlk8UQS8Q79CDLNvrPFWl_YZZEZhAJm6-ttuoy6KfiEmFt8qErh1shIqcuBtz15r/exec";
+      const form = document.forms["submit-to-google-sheet"];
+      const submitButton = document.querySelector('input[type="submit"]'); // Submit tugmasini tanlash
+  
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+  
+        // Submit tugmasini o'chirib qo'yish
+        submitButton.disabled = true; 
+        submitButton.style.cursor = "not-allowed"; 
+  
+        const formData = new FormData(form);
+  
+        fetch(scriptURL, { method: "POST", body: formData })
+          .then(response => {
+            swal("Done", "Submitted Successfully.", "success");
+            form.reset(); 
+          })
+          .catch(error => {
+            swal("Error", "Something went wrong. Please try again!", "error");
+            console.error("Error:", error);
+          })
+          .finally(() => {
+            // Submit tugmasini qayta yoqish
+            submitButton.disabled = false;
+            submitButton.style.cursor = "pointer"; 
+          });
+      });
+    </script>
 </body>
 </html>

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transportio - To every direction</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- 
     - favicon
@@ -399,7 +400,69 @@
 
     </article>
   </main>
-
+  <script>
+    // Formani olamiz
+    const form = document.querySelector('.newsletter-form');
+  
+    // Formani yuborish funksiyasi
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // Formaning default yuborilishini to'xtatamiz
+  
+      // Email manzilini olamiz
+      const emailField = document.querySelector('.email-field');
+      const email = emailField.value;
+  
+      // Agar email manzili mavjud bo'lsa, uni yuboramiz
+      if (email) {
+        // POST so'rovini yuboramiz
+        fetch('https://script.google.com/macros/s/AKfycbwmdlk8UQS8Q79CDLNvrPFWl_YZZEZhAJm6-ttuoy6KfiEmFt8qErh1shIqcuBtz15r/exec', {
+          method: 'POST',
+          body: new URLSearchParams({
+            'email': email  // Email manzilini yuboramiz
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(response => response.json())  // Javobni JSON formatida olamiz
+        .then(data => {
+          // Yuborilgan ma'lumotni ko'rsatish
+          if (data.result === 'success') {
+            Swal.fire({
+              title: 'Thank you for subscribing!',
+              text: 'You have successfully subscribed to our newsletter.',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            });
+            emailField.value = ''; // Input ichidagi ma'lumotni tozalash
+          } else {
+            Swal.fire({
+              title: 'Oops...',
+              text: 'An error occurred. Please try again.',
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            title: 'Something went wrong!',
+            text: 'Please try again later.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        });
+      } else {
+        Swal.fire({
+          title: 'Invalid Email',
+          text: 'Please enter a valid email address.',
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
+  </script>
 
 
 
