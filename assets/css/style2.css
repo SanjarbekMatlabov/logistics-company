@@ -291,12 +291,12 @@ background-color: red; }
   align-items: center;
   gap: 30px;
 }
-
+/* 
 .logo {
   font-family: var(--ff-oswald);
   color: var(--white);
-  font-size: 3rem;
-}
+  font-size: 2rem;
+} */
 
 .nav-open-btn {
   color: var(--white);
@@ -333,10 +333,10 @@ background-color: red; }
   padding: 30px 20px;
 }
 
-.navbar-top .logo {
-  color: var(--onyx);
-  font-size: 3rem;
-}
+  /* .navbar-top .logo {
+    color: var(--onyx);
+    font-size: 3rem;
+  } */
 
 .nav-close-btn { font-size: 25px; }
 
@@ -873,7 +873,7 @@ background-color: red; }
 
   .header .container { max-width: unset; }
 
-  .header .logo { font-size: 3.5rem; }
+  /* .header .logo { font-size: 3.5rem; } */
 
 
 

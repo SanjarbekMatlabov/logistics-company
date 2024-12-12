@@ -49,6 +49,15 @@ fetch('navbar.html')
   .then(html => {
     document.getElementById('form').innerHTML = html;
   })
+  .then(html=>{
+    const checkbox = document.getElementById('myCheckbox');
+    const submitButton2 = document.getElementById('submitButton');
+
+    // Checkbox holatini kuzatish
+    checkbox.addEventListener('change', () => {
+      submitButton2.disabled = !checkbox.checked;
+    });
+  })
   .then(html => {
     const scriptURL = "https://script.google.com/macros/s/AKfycbwmdlk8UQS8Q79CDLNvrPFWl_YZZEZhAJm6-ttuoy6KfiEmFt8qErh1shIqcuBtz15r/exec";
     const form = document.forms["submit-to-google-sheet"];
